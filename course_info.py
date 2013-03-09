@@ -1,5 +1,5 @@
 #course_info.py
-# this script inclues the Course, Department, and AP classes
+# this script includes all Berkeley Courses and Departments
 # also includes list of courses
 # please document with javadoc format:
 # 	before function, list:
@@ -9,24 +9,11 @@
 
 
 class Course:
-	# @params
-	# what function does
-	# @return
-	def __init__(self):
-		return
-
-class Department:
-	# @params
-	# what function does
-	# @return
-	def __init__(self):
-		return
-
-class APCredit:
-	# @params
-	# what function does
-	# @return
-	def __init__(self):
-		return
-
-courses = []
+	def __init__(self, department_abbrv, course_num, course_title = '', units, p_np = False, is_technical = False, prereqs = []):
+        self.department_abbrv = department_abbrv #String
+        self.course_num = course_num #String
+        self.course_title = course_title #String
+        self.units = units #Float
+        self.p_np = p_np #Boolean
+        self.is_technical = is_technical #Boolean
+        self.prereqs = prereqs #Compile all prereqs from database into list
