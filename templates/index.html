@@ -1,0 +1,105 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="row">
+  <div class="span10 offset1">
+    <form class="form-horizontal" action="/plan" method="post">
+      <div class="control-group">
+	<label class="control-label" for="current">Current Semester</label>
+	<div class="controls">
+	  <select class="selectpicker" name="current" id="currentDropdown">
+	    <option>Spring 2013</option>
+	    <option>Fall 2012</option>
+	  </select>
+	</div>
+      </div>
+      <div class="control-group">
+	<label class="control-label" for="grad">Graduation Semester</label>
+	<div class="controls">
+	  <select class="selectpicker" name="grad" id="gradDropdown">
+	    <option>Fall 2016</option>
+	    <option>Spring 2016</option>
+	    <option>Fall 2015</option>
+	    <option>Spring 2015</option>
+	  </select>
+	</div>
+      </div>
+      <div class="control-group">
+	<label class="control-label" for="completed">Semesters Completed</label>
+	<div class="controls">
+	  <select class="selectpicker" name="completed" id="completedDropdown">
+	    <option>0</option>
+	    <option>1</option>
+	    <option>2</option>
+	    <option>3</option>
+	    <option>4</option>
+	    <option>5</option>
+	    <option>6</option>
+	    <option>7</option>
+	    <option>8</option>
+	  </select>
+	</div>
+      </div>
+      <div class="control-group">
+	<label class="control-label" for="major">Major</label>
+	<div class="controls">
+	  <select class="selectpicker" name="major" id="majorDropdown">
+	    <option>EECS</option>
+	  </select>
+	</div>
+      </div>
+      <div class="control-group">
+	<label class="control-label" for="option">Option (EECS only)</label>
+	<div class="controls">
+	  <select class="selectpicker" name="option" id="optionDropdown">
+	    <option>I (Electronics)</option>
+	    <option>II (Communications, Networks, and Systems)</option>
+	    <option>III (Computer Systems)</option>
+	    <option>IV (Computer Science)</option>
+	    <option>V (General)</option>
+	  </select>
+	</div>
+      </div>
+      <div class="control-group">
+	<label class="control-label" for="exams">AP Exams</label>
+	<div class="controls">
+	  <table class="table table-bordered">
+	    <thead>
+	      <tr>
+		<th>Exam</th>
+		<th>Score</th>
+	      </tr>
+	    </thead>
+	    <tbody>
+	      {% for exam in exams %}
+	      <tr>
+		<td>
+		  <label class="checkbox" for="{{ exam }}">
+		    <input type="checkbox" name="{{ exam }}" value="1">
+		    {{ exam }}
+		  </label>
+		</td>
+		<td>
+		  <select class="selectpicker span1" name="{{ exam }} score" id="{{ exam }} scoreDropdown">
+		    <option value="0" selected>N/A</option>
+		    <option>1</option>
+		    <option>2</option>
+		    <option>3</option>
+		    <option>4</option>
+		    <option>5</option>
+		  </select>
+		</td>
+	      </tr>
+	      {% endfor %}
+	    </tbody>
+	  </table>
+	</div>
+      </div>      
+      <div class="control-group">
+	<div class="controls">
+	  <button type="submit" class="btn btn-primary">Generate!</button>
+	</div>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

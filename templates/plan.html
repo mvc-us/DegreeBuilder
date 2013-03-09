@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="row">
+  <div class="span10 offset1">
+    <h2>Parameters</h2>
+    <ul>
+      <li>Current Semester: {{ params['current'] }}</li>
+      <li>Graduation Semester: {{ params['grad'] }}</li>
+      <li>Semesters Completed: {{ params['completed'] }}</li>
+      <li>Major: {{ params['major'] }}</li>
+      <li>Option: {{ params['option'] }}</li>
+      <li>AP Exams:
+	<ul>
+	  {% for exam in params['scores'].keys() %}
+	  <li>{{ exam }}: {{ params['scores'][exam] }}</li>
+	  {% endfor %}
+	</ul>
+      </li>
+    </ul>
+  </div>
+</div>
+{% endblock %}
