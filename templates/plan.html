@@ -2,22 +2,25 @@
 {% block content %}
 <div class="row">
   <div class="span10 offset1">
-    <h2>Parameters</h2>
-    <ul>
-      <li>Current Semester: {{ params['current'] }}</li>
-      <li>Graduation Semester: {{ params['grad'] }}</li>
-      <li>Semesters Completed: {{ params['completed'] }}</li>
-      <li>Major: {{ params['major'] }}</li>
-      <li>Option: {{ params['option'] }}</li>
-      <li>Courses Taken: {{ params['courses'] }}</li>
-      <li>AP Exams:
-	<ul>
-	  {% for exam in params['scores'].keys() %}
-	  <li>{{ exam }}: {{ params['scores'][exam] }}</li>
-	  {% endfor %}
-	</ul>
-      </li>
-    </ul>
+    <h2>Schedule</h2>
+    {% for key in keys %}
+    <div class="span5">
+    <table class="table table-bordered table-condensed">
+      <thead>
+	<tr>
+	  <th>Year {{ key }}</th>
+	</tr>
+      </thead>
+      <tbody>
+      {% for course in schedule[key] %}
+        <tr>
+          <td>{{ course }}</td>
+	</tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    </div>
+    {% endfor %}
   </div>
 </div>
 {% endblock %}

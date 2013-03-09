@@ -5,9 +5,13 @@
 # @params
 # what function does
 # @return
-from algorithm import *
+from algorithm import algorithm
 from ap_info import *
 from course_info import *
+
+#Manual degree templates, will be replaced by database
+eecs4 = {'1.0': ['MATH 1A', 'SCIENCE', 'EECS 61A', 'HUMANITIES'], '1.5': ['MATH 1B', 'PHYSICS 7A', 'EECS 61B', 'HUMANITIES'], '2.0': ['MATH 53', 'PHYSICS 7B', 'EECS 61C', 'HUMANITIES'], '2.5': ['MATH 54', 'EECS 20N', 'EECS 70', 'HUMANITIES'], '3.0': ['PHYSICS 7C', 'EECS 40', 'EECS 162', 'TECHNICALELECTIVE'], '3.5': ['EECS 164', 'EECS 170', 'ELECTIVES', 'EECS 195'], '4.0': ['EECS 169', 'ENGINEERING', 'ELECTIVE', 'HUMANITIES'], '4.5': ['EECS 150', 'ENGINEERING', 'HUMANITIES', 'ELECTIVE']}
+eecs5 = {'1.0': ['MATH 1A', 'SCIENCE', 'EECS 61A', 'HUMANITIES'], '1.5': ['MATH 1B', 'PHYSICS 7A', 'EECS 61B', 'HUMANITIES'], '2.0': ['MATH 53', 'PHYSICS 7B', 'EECS 20N', 'HUMANITIES'], '2.5': ['MATH 54', 'PHYSICS 7C', 'EECS 70', 'HUMANITIES'], '3.0': ['EECS 40', 'EECS 105', 'EECS 61C', 'TECHNICALELECTIVE'], '3.5': ['EECS 120', 'EECS 140', 'EECS 150', 'HUMANITIES'], '4.0': ['EECS 117', 'EECS 130', 'EECS 162', 'HUMANITIES'], '4.5': ['EECS 143', 'EECS 152', 'HUMANITIES', 'EECS 195']}
 
 class Major:
     #majors is a dictionary of majors with determined courses (dictionaries of key major + option, value list of required courses)
@@ -36,7 +40,7 @@ class Student(Major):
         """
         self.currentyear = currentyear
         self.gradyear = gradyear # ignore for now
-        self.major = Major.majors[major + emphasis] #Example: For EECS Option V, self.major = eecsoption5
+        self.major = Major.majors[major.lower() + emphasis] #Example: For EECS Option V, self.major = eecsoption5
         self.emphasis = emphasis
         self.college = college
         self.aps_taken = apdict
@@ -49,14 +53,9 @@ class Student(Major):
 		#Note: gradyear - currentyear - (4 - currentyear) = Current Calendar year 
 		#Put taken_courses in school_schedule
 		#Example: taken_courses = {1.0: ['Math 53', 'EECS 61A', 'Physics 7A', 'Anthro R5B']} -> school_schedule = {1.0: ['MATH 53', 'EECS 61A', 'PHYSICS 7A', 'ANTHRO R5B'], 1.5: [], 2.0: [], 2.5: [], 3.0: [], 3.5: [], 4.0: [], 4.5: []}
-    def generate_schedule(self, algorithm, major = self.major):
-        self.major = major #Reassigns student's major for algorithm purposes. i.e. first test using option4, then option5
+    def generate_schedule(self, algo=algorithm):
+        #Reassigns student's major for algorithm purposes. i.e. first test using option4, then option5
         #if testing for new major, be sure to change back!
         """Takes in and applies algorithm based on student's major to school_schedule."""
-        self.school_schedule = algorithm(self) #Algorithm returns ideal graduation plan
+        self.school_schedule = algo(self) #Algorithm returns ideal graduation plan
         return self.school_schedule
-        
-
-#Manual degree templates, will be replaced by database
-eecs4 = {'1.0': ['MATH 1A', 'SCIENCE', 'EECS 61A', 'HUMANITIES'], '1.5': ['MATH 1B', 'PHYSICS 7A', 'EECS 61B', 'HUMANITIES'], '2.0': ['MATH 53', 'PHYSICS 7B', 'EECS 61C', 'HUMANITIES'], '2.5': ['MATH 54', 'EECS 20N', 'EECS 70', 'HUMANITIES'], '3.0': ['PHYSICS 7C', 'EECS 40', 'EECS 162', 'TECHNICALELECTIVE'], '3.5': ['EECS 164', 'EECS 170', 'ELECTIVES', 'EECS 195'], '4.0': ['EECS 169', 'ENGINEERING', 'ELECTIVE', 'HUMANITIES'], '4.5': ['EECS 150', 'ENGINEERING', 'HUMANITIES', 'ELECTIVE']}
-eecs5 = {'1.0': ['MATH 1A', 'SCIENCE', 'EECS 61A', 'HUMANITIES'], '1.5': ['MATH 1B', 'PHYSICS 7A', 'EECS 61B', 'HUMANITIES'], '2.0': ['MATH 53', 'PHYSICS 7B', 'EECS 20N', 'HUMANITIES'], '2.5': ['MATH 54', 'PHYSICS 7C', 'EECS 70', 'HUMANITIES'], '3.0': ['EECS 40', 'EECS 105', 'EECS 61C', 'TECHNICALELECTIVE'], '3.5': ['EECS 120', 'EECS 140', 'EECS 150', 'HUMANITIES'], '4.0': ['EECS 117', 'EECS 130', 'EECS 162', 'HUMANITIES'], '4.5': ['EECS 143', 'EECS 152', 'HUMANITIES', 'EECS 195']}
