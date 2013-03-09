@@ -5,6 +5,7 @@
 # function computes ideal schedule
 # @return: dict with the keys as semesters and values as lists of courses
 
+from dbinteract import get_course
 from ap_info import *
 from student_info import *
 from course_info import *
@@ -20,11 +21,11 @@ def algorithm(student):
 	completed_courses = []
 	needed_courses = []
 	
-	for key in student.taken_courses:
-		for item in student.taken_courses[key]:
-			completed_courses.append(item)
+	for item in student.taken_courses:
+		completed_courses.append(item)
 
-	completed_courses.append(APCreditMain.get_credit(student))
+	ap = APCreditMain()
+	completed_courses.extend(ap.get_skipped(student))
 
 	req = completed(plan)
 	for course in completed_courses:
@@ -50,7 +51,7 @@ def course_map(student_dict, needed_courses, student, completed_courses, unit_ca
 		course_units = course.units
 
 		pre_tech_total = 0
-		if course.is_technical:
+		if course.technical:
 			pre_tech_total = course_units
 
 		for key in student_dict:
@@ -60,14 +61,17 @@ def course_map(student_dict, needed_courses, student, completed_courses, unit_ca
 
 			for course1 in student_dict[key]:
 				course1 = get_course(course1)
-				sem_total += course1.units
+				if not course1:
+					sem_total += 0
+				else:
+					sem_total += course1.units
 
-				if course1.is_technical:
-					tech_total += course1.units
+					if course1.technical:
+						tech_total += course1.units
 
-				if course1 in needed_prereqs:
-					needed_prereqs.remove(course1)
-					this_sem_prereq = True
+					if course1 in needed_prereqs:
+						needed_prereqs.remove(course1)
+						this_sem_prereq = True
 
 			if sem_total <= unit_cap and tech_total <= technical_cap and not this_sem_prereq:
 				student_dict[key].append(course)
@@ -80,7 +84,7 @@ def course_map(student_dict, needed_courses, student, completed_courses, unit_ca
 		course_units = course.units
 
 		pre_tech_total = 0
-		if course.is_technical:
+		if course.technical:
 			pre_tech_total = course_units
 
 		for key in student_dict:
@@ -89,13 +93,16 @@ def course_map(student_dict, needed_courses, student, completed_courses, unit_ca
 
 			for course1 in student_dict[key]:
 				course1 = get_course(course1)
-				sem_total += course1.units
+				if not course1:
+					sem_total += 0
+				else:
+					sem_total += course1.units
 
-				if course1.is_technical:
-					tech_total += course1.units
+					if course1.technical:
+						tech_total += course1.units
 
-				if sem_total > unit_cap or tech_total > technical_cap:
-					break
+					if sem_total > unit_cap or tech_total > technical_cap:
+						break
 
 			if sem_total <= unit_cap and tech_total <= technical_cap:
 				student_dict[key].append(course)
@@ -114,18 +121,20 @@ def course_map(student_dict, needed_courses, student, completed_courses, unit_ca
 
 	while len(needed_courses) != 0:
 		for course in needed_courses:
+			course = get_course(course)
+			if not course: continue
 			if len(course.prereqs) == 0:
 				if add_early(course):
-					needed_courses.remove(course)
-					completed_courses.append(course)
+					needed_courses.remove(course.toString())
+					completed_courses.append(course.toString())
 				else:
 					return {FAILURE: course}
 			else:
 				completed_courses = completed(student_dict)
 				if scan_prereq(course):
 					if add_later(course):
-						needed_courses.remove(course)
-						completed_courses.append(course)
+						needed_courses.remove(course.toString())
+						completed_courses.append(course.toString())
 					else:
 						return {FAILURE: course}
 

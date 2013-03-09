@@ -25,11 +25,12 @@ def add_prereqs(name, prereqs):
     conn.close()
 
 def get_course(name):
+    if isinstance(name, Course): return name
     special = { 'HUMANITIES': Course('HUMANITIES', units = 4.0),
-                'SCIENCE': Course('SCIENCE', units = 4.0, is_technical = 1),
+                'SCIENCE': Course('SCIENCE', units = 4.0, technical = 1),
                 'ELECTIVE': Course('ELECTIVE', units = 4.0),
                 'ELECTIVES': Course('ELECTIVES', units = 4.0),
-                'TECHNICALELECTIVE', Course('TECHNICAL ELECTIVE', units = 4.0, is_technical = 1) }
+                'TECHNICAL ELECTIVE': Course('TECHNICAL ELECTIVE', units = 4.0, technical = 1) }
     if name in special.keys():
         return special[name]
     return get_course_by_id(find_id_coursecode(name))

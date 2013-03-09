@@ -44,6 +44,7 @@ def plan_page():
                       params['major'], str(params['option']), apdict=params['scores'],
                       taken_courses=params['courses'])
     schedule = student.generate_schedule()
+    print schedule
     #schedule = {'1.0': ['MATH 1A', 'SCIENCE', 'EECS 61A', 'HUMANITIES'], '1.5': ['MATH 1B', 'PHYSICS 7A', 'EECS 61B', 'HUMANITIES'], '2.0': ['MATH 53', 'PHYSICS 7B', 'EECS 61C', 'HUMANITIES'], '2.5': ['MATH 54', 'EECS 20N', 'EECS 70', 'HUMANITIES'], '3.0': ['PHYSICS 7C', 'EECS 40', 'EECS 162', 'TECHNICALELECTIVE'], '3.5': ['EECS 164', 'EECS 170', 'ELECTIVES', 'EECS 195'], '4.0': ['EECS 169', 'ENGINEERING', 'ELECTIVE', 'HUMANITIES'], '4.5': ['EECS 150', 'ENGINEERING', 'HUMANITIES', 'ELECTIVE']}
     orderedkeys = sorted(schedule.keys())
     return render_template('plan.html', schedule=schedule, keys=orderedkeys, n=len(orderedkeys))
