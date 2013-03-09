@@ -124,6 +124,8 @@ def course_map(student_dict, needed_courses, student, completed_courses, unit_ca
 			course = get_course(course)
 			if not course: continue
 			if len(course.prereqs) == 0:
+				for i in range(3):
+					map_del(student_dict, course.toString())
 				if add_early(course):
 					needed_courses.remove(course.toString())
 					completed_courses.append(course.toString())
@@ -132,6 +134,7 @@ def course_map(student_dict, needed_courses, student, completed_courses, unit_ca
 			else:
 				completed_courses = completed(student_dict)
 				if scan_prereq(course):
+					map_del(student_dict, course.toString())
 					if add_later(course):
 						needed_courses.remove(course.toString())
 						completed_courses.append(course.toString())
