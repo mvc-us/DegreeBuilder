@@ -40,7 +40,7 @@ class Student(Major):
 		#Example: taken_courses = {1.0: ['Math 53', 'CS 61A', 'Physics 7A', 'Anthro R5B']} -> school_schedule = {1.0: ['Math 53', 'CS 61A', 'Physics 7A', 'Anthro R5B'], 1.5: [], 2.0: [], 2.5: [], 3.0: [], 3.5: [], 4.0: [], 4.5: []}
 	def generate_schedule(self, algorithm, Major.major):
 		"""Takes in and applies algorithm based on student's major to school_schedule."""
-		student.school_schedule = algorithm(Major.major, student.school_schedule, emphasis = None) #Algorithm returns ideal graduation plan
+		student.school_schedule = algorithm(self) #Algorithm returns ideal graduation plan
 		return student.school_schedule
     def apply_ap_credit(self):
         
