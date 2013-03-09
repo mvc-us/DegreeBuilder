@@ -50,7 +50,7 @@ def not_found(error):
 
 @app.route('/')
 def index_page():
-    return render_template('index.html', exams=sorted(exam_list()))
+    return render_template('index.html', exams=exam_list())
 
 @app.route('/plan', methods=['POST'])
 def plan_page():
@@ -67,6 +67,14 @@ def plan_page():
     print params
     return render_template('plan.html', params=params)
 
+@app.route('/addclass', methods=['POST'])
+def add_class():
+    g.db.execute('insert into entries (title, text) values (?, ?)',
+                 [request.form['title'], request.form['text']])
+    g.db.commit()
+    flash('New entry was successfully posted')
+    return redirect(url_for('show_entries'))
+
 def parse_semester(semester):
     semester = semester.split()
     season = str(semester[0])
@@ -78,7 +86,7 @@ def parse_option(option):
     return optionmap[option.split()[0]]
 
 def exam_list():
-    return APEngineering.keys()
+    return sorted(APEngineering.keys())
 
 def exams_taken(args):
     taken = []
@@ -95,6 +103,9 @@ def exam_scores(args):
         scorestr = exam + " score"
         exams[exam] = int(args[scorestr])
     return exams
+
+def store_course(course):
+    
 
 if __name__ == '__main__':
     app.run()
