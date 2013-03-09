@@ -9,8 +9,12 @@
 
 
 class Major:
-	def __init__(self):
-		return
+	#@params: dict of major requirements -  int(# from following list): [array of courses to choose from]
+		# dict of determined courses - by default, what classes student will take in a given semester for the major
+	def __init__(self, req_list_dict, determined_courses_dict):
+		self.requirements = req_list_dict
+		self.determined_courses = determined_courses_dict
+		
 
 
 class Student(Major):
