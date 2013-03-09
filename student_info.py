@@ -13,8 +13,12 @@ class Major:
     #majors is a dictionary of majors with determined courses (dictionaries of key major + option, value list of required courses)
     #Later will be made into database of degree templates
     majors = {'eecsoption4': eecsoption4, 'eecsoption5': eecsoption5}
-    def __init__(self):
-        return
+    
+    		#@params: dict of major requirements -  (tuple of courses to choose from): int(# needed from these)
+		# dict of determined courses - by default, what classes student will take in a given semester for the major
+	def __init__(self, req_list_dict, determined_courses_dict):
+		self.requirements = req_list_dict
+		self.determined_courses = determined_courses_dict
 
 
 class Student(Major):
