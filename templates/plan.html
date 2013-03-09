@@ -3,22 +3,40 @@
 <div class="row">
   <div class="span10 offset1">
     <h2>Schedule</h2>
-    {% for key in keys %}
+    {% for i in range(0, n, 2) %}
+    <div class="row">
     <div class="span5">
     <table class="table table-bordered table-condensed">
       <thead>
 	<tr>
-	  <th>Year {{ key }}</th>
+	  <th>Year {{ keys[i] }}</th>
 	</tr>
       </thead>
       <tbody>
-      {% for course in schedule[key] %}
+      {% for course in schedule[keys[i]] %}
         <tr>
           <td>{{ course }}</td>
 	</tr>
       {% endfor %}
       </tbody>
     </table>
+    </div>
+    <div class="span5">
+    <table class="table table-bordered table-condensed">
+      <thead>
+	<tr>
+	  <th>Year {{ keys[i+1] }}</th>
+	</tr>
+      </thead>
+      <tbody>
+      {% for course in schedule[keys[i+1]] %}
+        <tr>
+          <td>{{ course }}</td>
+	</tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    </div>
     </div>
     {% endfor %}
   </div>
