@@ -9,11 +9,11 @@
 
 
 class Course:
-	def __init__(self, department_abbrv, course_num, course_title = '', units, p_np = False, is_technical = False, prereqs = []):
-        self.department_abbrv = department_abbrv #String
-        self.course_num = course_num #String
-        self.course_title = course_title #String
-        self.units = units #Float
-        self.p_np = p_np #Boolean
-        self.is_technical = is_technical #Boolean
-        self.prereqs = prereqs #Compile all prereqs from database into list
+	def __init__(self, abbrv, num, title = '', units, pnp = 0, technical = 0, prereqs = []):
+		self.abbrv = abbrv #String
+		self.num = num #String
+		self.title = title #String
+		self.units = units #Float
+		self.pnp = pnp #0 or 1
+		self.technical = technical #0 or 1
+		self.prereqs = prereqs #Compile all prereqs from database into list
