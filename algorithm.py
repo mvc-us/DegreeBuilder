@@ -70,11 +70,11 @@ def course_map(student_dict, needed_courses, student, completed_courses, unit_ca
 						tech_total += course1.units
 
 					if course1 in needed_prereqs:
-						needed_prereqs.remove(course1)
+						needed_prereqs.remove(course1.toString())
 						this_sem_prereq = True
 
 			if sem_total <= unit_cap and tech_total <= technical_cap and not this_sem_prereq:
-				student_dict[key].append(course)
+				student_dict[key].append(course.toString())
 				return True
 
 		return False
@@ -105,7 +105,7 @@ def course_map(student_dict, needed_courses, student, completed_courses, unit_ca
 						break
 
 			if sem_total <= unit_cap and tech_total <= technical_cap:
-				student_dict[key].append(course)
+				student_dict[key].append(course.toString())
 				return True
 
 		return False
@@ -148,9 +148,10 @@ def course_map(student_dict, needed_courses, student, completed_courses, unit_ca
 
 		while need > 0:
 			test_course = random.choice(key)
+			print test_course
 			if test_course not in completed_courses:
 				completed_courses.append(test_course)
-				add_later(test_course)
+				add_later(get_course(test_course))
 				need -= 1
 
 	return student_dict
