@@ -42,7 +42,6 @@ class Student(Major):
 		"""Takes in and applies algorithm based on student's major to school_schedule."""
 		student.school_schedule = algorithm(self) #Algorithm returns ideal graduation plan
 		return student.school_schedule
-    def apply_ap_credit(self):
         
 
 majors = []
