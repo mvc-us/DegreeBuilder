@@ -27,10 +27,10 @@ class Major:
 
 class Student(Major):
     """Creates a profile for a student and his/her school schedule in order to graduate."""
-    def __init__(self, currentyear, gradyear, major, emphasis, college = 'Engineering', apdict = {}, taken_courses = {}, wanted_courses = []):
+    def __init__(self, currentyear, num_semesters, major, emphasis, college = 'Engineering', apdict = {}, taken_courses = {}, wanted_courses = []):
         """Creates student profile and fills in the courses the student has taken so far.
         currentyear = current year of student #1.0 = Fall of First Year, 2.5 = Spring of Second Year
-        gradyear = expected graduation year of student #Front end asks for Yr + Sem of graduation.
+        num_semesters = the number of semesters left until graduation
         major = major of student #Drop down menu Front End. EECS = Electrical Engineering & Computer Science. Major object
         college = college of student #engineering, l&s, etc.
         emphasis = emphasis in major #For EECS, Option I-V as String
@@ -39,7 +39,7 @@ class Student(Major):
         wanted_courses = list of courses student wants to take #['Music 26AC', 'Math 170']
         """
         self.currentyear = currentyear
-        self.gradyear = gradyear # ignore for now
+        self.num_semesters = num_semesters
         self.major = Major.majors[major.lower() + emphasis] #Example: For EECS Option V, self.major = eecsoption5
         self.emphasis = emphasis
         self.college = college

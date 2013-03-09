@@ -39,7 +39,8 @@ def plan_page():
     params['courses'] = parse_courselist(args['courses'])
     params['scores'] = exam_scores(args)
     # print params
-    student = Student(semester_to_year(params['completed']), params['grad'],
+    semleft = semesters_left(params['current'], params['grad'])
+    student = Student(semester_to_year(params['completed']), semleft,
                       params['major'], str(params['option']), apdict=params['scores'],
                       taken_courses=params['courses'])
     #schedule = student.generate_schedule()
@@ -50,6 +51,16 @@ def plan_page():
 
 def semester_to_year(completed):
     return 1.0 + (0.5 * completed)
+
+def semesters_left(current, grad):
+    seasoncurr = current[0]
+    seasongrad = grad[0]
+    yrcurr = current[1]
+    yrgrad = grad[1]
+    if seasoncurr == seasongrad:
+        return 2*(yrgrad - yrcurr)
+    else:
+        return (2*(yrgrad - yrcurr)) - 1
 
 def parse_semester(semester):
     semester = semester.split()
