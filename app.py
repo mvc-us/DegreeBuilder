@@ -67,14 +67,6 @@ def plan_page():
     print params
     return render_template('plan.html', params=params)
 
-@app.route('/addclass', methods=['POST'])
-def add_class():
-    g.db.execute('insert into entries (title, text) values (?, ?)',
-                 [request.form['title'], request.form['text']])
-    g.db.commit()
-    flash('New entry was successfully posted')
-    return redirect(url_for('show_entries'))
-
 def parse_semester(semester):
     semester = semester.split()
     season = str(semester[0])
