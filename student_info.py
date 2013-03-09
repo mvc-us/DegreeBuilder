@@ -18,7 +18,7 @@ eecs5reqs = {('PHYSICS 7A', 'PHYSICS 7B', 'MATH 1A', 'MATH 1B', 'MATH 53', 'MATH
 class Major:
     #majors is a dictionary of majors with determined courses (dictionaries of key major + option, value list of required courses)
     #Later will be made into database of degree templates
-    majors = {'eecs4': eecs4, 'eecs5': eecs5}
+    majors = {'eecs4': Major(eecs4reqs, eecs4), 'eecs5': Major(eecs5reqs, eecs5)}
 
      #@params: dict of major requirements - (tuple of courses to choose from): int(# needed from these)
      # dict of determined courses - by default, what classes student will take in a given semester for the major
