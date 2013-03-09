@@ -8,21 +8,40 @@ APEngineering = {'Art History': [(3, 4, 5), 5.3, 'lower_hss'], 'Biology': [(4, 5
 APLS = {}
 class APCreditMain:
     """Returns credit received based on each AP Exam."""
-    ap_credit = {}
-    def get_credit(self, student_dict, college):
+    def get_credit(self, student):
         """Returns dictionary with keys of APs taken, values in list of format [credit, Skippable Courses]"""
-        for key in Student.apdict:
+        student_dict = student.aps_taken
+        ap_credit = {}
+        for key in student:
             ap_credit[key] = [] #For each AP taken creates key, value pair in ap_credit
         #ap_credit will be filled differently depending on value of college
         if college.lower() == 'engineering':
-            for key in Student.apdict:
+            for key in student_dict:
                 for i in range(len(APEngineering[key][0])):
-                    if Student.apdict[key] == APEngineering[key][0][i]:
+                    if student_dict[key] == APEngineering[key][0][i]:
                         ap_credit[key] = APEngineering[key][1:]
         elif college.lower() == 'l&s' or college.lower() == 'letters and sciences':
-            for key in Student.apdict:
+            for key in student_dict:
                 for i in range(len(APLS[key][0])):
-                    if Student.apdict[key] == APLS[key][0][i]:
+                    if student_dict[key] == APLS[key][0][i]:
                         ap_credit[key] = APLS[key][1:]
         #IMPLEMENT REST OF COLLEGE CASES HERE
         return ap_credit
+
+    def get_skipped(self, student):
+        """Returns list of skipped classes."""
+        student_dict = student.aps_taken
+        skipped_classes = []
+        #ap_credit will be filled differently depending on value of college
+        if student.college.lower() == 'engineering':
+            for key in student_dict:
+                for i in range(len(APEngineering[key][0])):
+                    if student_dict[key] == APEngineering[key][0][i]:
+                        skipped_classes.extend(APEngineering[key][2:])
+        elif student.college.lower() == 'l&s' or college.lower() == 'letters and sciences':
+            for key in student_dict:
+                for i in range(len(APLS[key][0])):
+                    if student_dict[key] == APLS[key][0][i]:
+                        skipped_classes.extend(APLS[key][2:])
+        #IMPLEMENT REST OF COLLEGE CASES HERE
+        return skipped_classes
