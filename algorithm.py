@@ -175,6 +175,13 @@ def map_del(student_dict, course):
 			if course == item:
 				student_dict[key].remove(course)
 				return None
+				
+def humanities_rep(student_dict):
+	for i in range(6):
+		for key in student_dict:
+			student_dict[key] = [x.replace("HUMANITIES", random.choice(HUMAN)) for x in student_dict[key])		
+					
+	
 
 
 
