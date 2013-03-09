@@ -128,7 +128,7 @@ def course_map(student_dict, needed_courses, student, completed_courses, unit_ca
 					needed_courses.remove(course.toString())
 					completed_courses.append(course.toString())
 				else:
-					return {FAILURE: course}
+					return student_dict #return {FAILURE: course}
 			else:
 				completed_courses = completed(student_dict)
 				if scan_prereq(course):
@@ -136,7 +136,7 @@ def course_map(student_dict, needed_courses, student, completed_courses, unit_ca
 						needed_courses.remove(course.toString())
 						completed_courses.append(course.toString())
 					else:
-						return {FAILURE: course}
+						return student_dict #{FAILURE: course}
 
 	for key in student.major.requirements:
 		need = student.major.requirements[key]
