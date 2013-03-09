@@ -8,32 +8,42 @@
 from ap_info import *
 from student_info import *
 from course_info import *
+import random
+
 FAILURE = -1
 
 def algorithm(student):
 	plan = dict(student.major.determined_courses)
+	for i in range(1, student.num_semesters + 1):
+		if i not in plan:
+			plan[i] = []
 	completed_courses = []
 	needed_courses = []
-	#im not positive about the following line of code, it should basically just add the courses that the person
-	# has already taken coming from the taken_courses dict
-	completed_courses.append([(item for item in student.taken_courses[key]) for key in student.taken_courses])
+	
+	for key in student.taken_courses:
+		for item in student.taken_courses[key]):
+			completed_courses.append(item)
+
 	completed_courses.append(apply_ap(student))
+
+	req = completed(plan)
+	for course in completed_courses:
+		if course in req:
+			map_del(plan, course)
+
 	for key in student.major.requirements:
 		if len(key) == student.major.requirements[key]:
-
 			for course in key:
 				if course not in completed_courses:
 					needed_courses.append(course)
-			continue
+			
+	if course in student.wanted_courses:
+		needed_courses.append(wanted_courses)
 
-		for course in key:
-			if course in student.wanted_courses:
-				needed_courses.append(wanted_courses)
-
-	return course_map(plan, needed_courses)
+	return course_map(plan, needed_courses, student, completed_courses)
 
 # @return: dict of courses to/have take(n)
-def course_map(student_dict, needed_courses, unit_cap = 16, technical_cap = 12):
+def course_map(student_dict, needed_courses, student, completed_courses, unit_cap = 16, technical_cap = 12):
 
 	def add_later(course):
 		needed_prereqs = list(course.prereqs)
@@ -107,6 +117,7 @@ def course_map(student_dict, needed_courses, unit_cap = 16, technical_cap = 12):
 			if len(course.prereqs) == 0:
 				if add_early(course):
 					needed_courses.remove(course)
+					completed_courses.append(course)
 				else:
 					return {FAILURE: course}
 			else:
@@ -114,8 +125,27 @@ def course_map(student_dict, needed_courses, unit_cap = 16, technical_cap = 12):
 				if scan_prereq(course):
 					if add_later(course):
 						needed_courses.remove(course)
+						completed_courses.append(course)
 					else:
-						return {FAILURE: course}	
+						return {FAILURE: course}
+
+	for key in student.major.requirements:
+		need = student.major.requirements[key]
+		for item in key:
+			if item in completed_courses:
+				need -= 1
+				if need <= 0:
+					break
+
+		while need > 0:
+			test_course = random.choice(key)
+			if test_course not in completed_courses:
+				completed_courses.append(test_course)
+				add_later(test_course)
+				need -= 1
+
+	return student_dict
+
 
 
 # @return: list of courses completed
@@ -124,6 +154,14 @@ def completed(student_dict):
 	for key in student_dict:
 		done += student_dict[key]
 	return done
+
+#@return void
+def map_del(student_dict, course):
+	for key in student_dict:
+		for item in student_dict[key]:
+			if course == item:
+				student_dict[key].remove(course)
+				return None
 
 
 
