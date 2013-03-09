@@ -21,7 +21,7 @@ def algorithm(student):
 	needed_courses = []
 	
 	for key in student.taken_courses:
-		for item in student.taken_courses[key]):
+		for item in student.taken_courses[key]:
 			completed_courses.append(item)
 
 	completed_courses.append(apply_ap(student))
