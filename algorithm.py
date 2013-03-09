@@ -5,10 +5,13 @@
 # function computes ideal schedule
 # @return: dict with the keys as semesters and values as lists of courses
 
+from ap_info import *
+from student_info import *
+from course_info import *
 FAILURE = -1
 
 def algorithm(student):
-  plan = dict(student.major.determined_courses)
+	plan = dict(student.major.determined_courses)
 	completed_courses = []
 	needed_courses = []
 	#im not positive about the following line of code, it should basically just add the courses that the person
