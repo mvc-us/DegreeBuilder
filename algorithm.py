@@ -20,9 +20,8 @@ def algorithm(student):
 	completed_courses = []
 	needed_courses = []
 	
-	for key in student.taken_courses:
-		for item in student.taken_courses[key]:
-			completed_courses.append(item)
+	for item in student.taken_courses:
+		completed_courses.append(item)
 
 	completed_courses.append(apply_ap(student))
 
@@ -31,7 +30,7 @@ def algorithm(student):
 		if course in req:
 			map_del(plan, course)
 
-	for key in student.major.requirements:
+	for key in student.major.requirements.keys():
 		if len(key) == student.major.requirements[key]:
 			for course in key:
 				if course not in completed_courses:

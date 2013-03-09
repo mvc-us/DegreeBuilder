@@ -12,13 +12,12 @@ from course_info import *
 #Manual degree templates, will be replaced by database
 eecs4 = {'1.0': ['MATH 1A', 'SCIENCE', 'EECS 61A', 'HUMANITIES'], '1.5': ['MATH 1B', 'PHYSICS 7A', 'EECS 61B', 'HUMANITIES'], '2.0': ['MATH 53', 'PHYSICS 7B', 'EECS 61C', 'HUMANITIES'], '2.5': ['MATH 54', 'EECS 20N', 'EECS 70', 'HUMANITIES'], '3.0': ['PHYSICS 7C', 'EECS 40', 'EECS 162', 'TECHNICALELECTIVE'], '3.5': ['EECS 164', 'EECS 170', 'ELECTIVES', 'EECS 195'], '4.0': ['EECS 169', 'ENGINEERING', 'ELECTIVE', 'HUMANITIES'], '4.5': ['EECS 150', 'ENGINEERING', 'HUMANITIES', 'ELECTIVE']}
 eecs5 = {'1.0': ['MATH 1A', 'SCIENCE', 'EECS 61A', 'HUMANITIES'], '1.5': ['MATH 1B', 'PHYSICS 7A', 'EECS 61B', 'HUMANITIES'], '2.0': ['MATH 53', 'PHYSICS 7B', 'EECS 20N', 'HUMANITIES'], '2.5': ['MATH 54', 'PHYSICS 7C', 'EECS 70', 'HUMANITIES'], '3.0': ['EECS 40', 'EECS 105', 'EECS 61C', 'TECHNICALELECTIVE'], '3.5': ['EECS 120', 'EECS 140', 'EECS 150', 'HUMANITIES'], '4.0': ['EECS 117', 'EECS 130', 'EECS 162', 'HUMANITIES'], '4.5': ['EECS 143', 'EECS 152', 'HUMANITIES', 'EECS 195']}
-eecs4reqs = {('PHYSICS 7A', 'PHYSICS 7B', 'MATH 1A', 'MATH 1B', 'MATH 53', 'MATH 54', 'CS 70', 'EECS 20N', 'EECS 40', 'EECS 61A', 'EECS 61B', 'EECS 61C'): 12, ('EECS C149', 'EECS 150', 'EECS 160', 'EECS 162', 'EECS 164', 'EECS 169', 'EECS 184', 'EECS 186', 'EECS C125', 'EECS C128', 'EECS 130', 'EECS 140', 'EECS 141', 'EECS 143', 'EECS 192'): 6, ('ANTHRO 2AC', 'ANTHRO R5A', 'ANTHRO R5B', 'HISTORY 11', 'ASAMST 125', 'ASAMT 141', 'ASAMST 138', 'GWS 10', 'GWS 125'): 6, ('ANTHRO 156', 'BIO ENG 100', 'ENGIN 124', 'ESPM 161', 'ESPM 162', 'PHILOS 107', 'PB HLTH 116'), 1}
-eecs5reqs = {('PHYSICS 7A', 'PHYSICS 7B', 'MATH 1A', 'MATH 1B', 'MATH 53', 'MATH 54', 'CS 70', 'EECS 20N', 'EECS 40', 'EECS 61A', 'EECS 61B', 'EECS 61C'): 12, ('EECS C149', 'EECS 150', 'EECS 160', 'EECS 162', 'EECS 164', 'EECS 169', 'EECS 184', 'EECS 186', 'EECS C125', 'EECS C128', 'EECS 130', 'EECS 140', 'EECS 141', 'EECS 143', 'EECS 192'): 6, ('ANTHRO 2AC', 'ANTHRO R5A', 'ANTHRO R5B', 'HISTORY 11', 'ASAMST 125', 'ASAMT 141', 'ASAMST 138', 'GWS 10', 'GWS 125'): 6, ('ANTHRO 156', 'BIO ENG 100', 'ENGIN 124', 'ESPM 161', 'ESPM 162', 'PHILOS 107', 'PB HLTH 116'), 1}
+eecs4reqs = {('PHYSICS 7A', 'PHYSICS 7B', 'MATH 1A', 'MATH 1B', 'MATH 53', 'MATH 54', 'CS 70', 'EECS 20N', 'EECS 40', 'EECS 61A', 'EECS 61B', 'EECS 61C'): 12, ('EECS C149', 'EECS 150', 'EECS 160', 'EECS 162', 'EECS 164', 'EECS 169', 'EECS 184', 'EECS 186', 'EECS C125', 'EECS C128', 'EECS 130', 'EECS 140', 'EECS 141', 'EECS 143', 'EECS 192'): 6, ('ANTHRO 2AC', 'ANTHRO R5A', 'ANTHRO R5B', 'HISTORY 11', 'ASAMST 125', 'ASAMT 141', 'ASAMST 138', 'GWS 10', 'GWS 125'): 6, ('ANTHRO 156', 'BIO ENG 100', 'ENGIN 124', 'ESPM 161', 'ESPM 162', 'PHILOS 107', 'PB HLTH 116'): 1}
+eecs5reqs = {('PHYSICS 7A', 'PHYSICS 7B', 'MATH 1A', 'MATH 1B', 'MATH 53', 'MATH 54', 'CS 70', 'EECS 20N', 'EECS 40', 'EECS 61A', 'EECS 61B', 'EECS 61C'): 12, ('EECS C149', 'EECS 150', 'EECS 160', 'EECS 162', 'EECS 164', 'EECS 169', 'EECS 184', 'EECS 186', 'EECS C125', 'EECS C128', 'EECS 130', 'EECS 140', 'EECS 141', 'EECS 143', 'EECS 192'): 6, ('ANTHRO 2AC', 'ANTHRO R5A', 'ANTHRO R5B', 'HISTORY 11', 'ASAMST 125', 'ASAMT 141', 'ASAMST 138', 'GWS 10', 'GWS 125'): 6, ('ANTHRO 156', 'BIO ENG 100', 'ENGIN 124', 'ESPM 161', 'ESPM 162', 'PHILOS 107', 'PB HLTH 116'): 1}
 
 class Major:
     #majors is a dictionary of majors with determined courses (dictionaries of key major + option, value list of required courses)
     #Later will be made into database of degree templates
-    majors = {'eecs4': Major(eecs4reqs, eecs4), 'eecs5': Major(eecs5reqs, eecs5)}
 
      #@params: dict of major requirements - (tuple of courses to choose from): int(# needed from these)
      # dict of determined courses - by default, what classes student will take in a given semester for the major
@@ -26,10 +25,11 @@ class Major:
         self.requirements = req_list_dict
         self.determined_courses = determined_courses_dict
 
+majors = {'eecs4': Major(eecs4reqs, eecs4), 'eecs5': Major(eecs5reqs, eecs5)}
 
 class Student(Major):
     """Creates a profile for a student and his/her school schedule in order to graduate."""
-    def __init__(self, currentyear, num_semesters, major, emphasis, college = 'Engineering', apdict = {}, taken_courses = {}, wanted_courses = []):
+    def __init__(self, currentyear, num_semesters, major, emphasis, college = 'Engineering', apdict = {}, taken_courses = [], wanted_courses = []):
         """Creates student profile and fills in the courses the student has taken so far.
         currentyear = current year of student #1.0 = Fall of First Year, 2.5 = Spring of Second Year
         num_semesters = the number of semesters left until graduation
@@ -42,7 +42,7 @@ class Student(Major):
         """
         self.currentyear = currentyear
         self.num_semesters = num_semesters
-        self.major = Major.majors[major.lower() + emphasis] #Example: For EECS Option V, self.major = eecsoption5
+        self.major = majors[major.lower() + emphasis] #Example: For EECS Option V, self.major = eecsoption5
         self.emphasis = emphasis
         self.college = college
         self.aps_taken = apdict
