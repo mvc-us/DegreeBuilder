@@ -44,7 +44,7 @@ def plan_page():
                       taken_courses=params['courses'])
     schedule = student.generate_schedule
     orderedkeys = sorted(schedule.keys())
-    return render_template('plan.html', params=params)
+    return render_template('plan.html', schedule=schedule)
 
 def semester_to_year(completed):
     return 1.0 + (0.5 * completed)

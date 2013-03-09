@@ -7,9 +7,8 @@
 # 		what function does
 # 		@return
 
-
 class Course:
-	def __init__(self, abbrv, num = 'SEE LIST', title = '', units, pnp = 0, technical = 0, prereqs = []):
+	def __init__(self, abbrv, num = '', title = '', units, pnp = 0, technical = 0, prereqs = []):
 		self.abbrv = abbrv #String
 		self.num = num #String
 		self.title = title #String
@@ -19,11 +18,3 @@ class Course:
 		self.prereqs = prereqs #Compile all prereqs from database into list
 	def toString(self):
 		return str(self.abbrv) + ' ' + str(self.num)
-        
-#Needs to be instantiated for algorithm to work. But how to assign String to be Course object?
-#Example: Algorithm appends 'HUMANITIES' as a required course. 'HUMANITIES' refernces what?
-HUMANITIES = Course('HUMANITIES',units = 4.0)
-SCIENCE = Course('SCIENCE', units = 4.0, is_technical = 1)
-ELECTIVE = Course('ELECTIVE', units = 4.0)
-ELECTIVES = Course('ELECTIVES', units = 4.0)
-TECHNICALELECTIVE = Course('TECHNICAL ELECTIVE', units = 4.0, is_technical = 1)
