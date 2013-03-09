@@ -9,12 +9,8 @@
 
 
 class Major:
-	#@params: dict of major requirements -  (tuple of courses to choose from): int(# needed from these)
-		# dict of determined courses - by default, what classes student will take in a given semester for the major
-	def __init__(self, req_list_dict, determined_courses_dict):
-		self.requirements = req_list_dict
-		self.determined_courses = determined_courses_dict
-		
+	def __init__(self):
+		return
 
 
 class Student(Major):
@@ -25,7 +21,7 @@ class Student(Major):
 		currentyear = current year of student #1.0 = Fall of First Year, 2.5 = Spring of Second Year
 		gradyear = expected graduation year of student #Front end asks for Yr + Sem of graduation. 2016.5 = Spring 2016
 		major = major of student #Drop down menu Front End. EECS = Electrical Engineering & Computer Science
-        emphasis = emphasis in major #For EECS, Option I-V as String
+        	emphasis = emphasis in major #For EECS, Option I-V as String
 		apdict = dictionary with AP as key, score as value of APs student has taken #{'Calculus AB': 5, 'Calculus BC': 5, 'World History': 5}
 		taken_courses = dictionary of courses student has already taken in a list corresponding to values of year they've been taken. #{1.0: ['Math 53', 'CS 61A', 'Physics 7A', 'Anthro R5B']
 		wanted_courses = list of courses student wants to take #['Music 26AC', 'Math 170']
@@ -33,7 +29,7 @@ class Student(Major):
 		self.currentyear = currentyear
 		self.gradyear = gradyear
 		self.major = major
-        self.emphasis = emphasis
+        	self.emphasis = emphasis
 		self.aps_taken = apdict
 		#populates school_schedule with courses already taken
 		"""CODE HERE"""
