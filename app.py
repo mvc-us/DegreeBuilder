@@ -1,14 +1,52 @@
+from __future__ import with_statement
+from contextlib import closing
 from flask import Flask, request, session, redirect, url_for, abort, g, render_template, flash
 from ap_info import APEngineering
+import sqlite3
 
-app = Flask(__name__)
-app.config.from_object(__name__)
-
+# temporary
 DATABASE = '/db/database.db'
 DEBUG = True
 SECRET_KEY = 'development key'
 USERNAME = 'admin'
 PASSWORD = 'default'
+
+# initialize app
+app = Flask(__name__)
+app.config.from_object(__name__)
+
+# from flask docs
+def connect_db():
+    return sqlite3.connect(app.config['DATABASE'])
+
+# from flask docs
+def init_db():
+    with closing(connect_db()) as db:
+        with register.open_resource('schema.sql') as f:
+            db.cursor().executescript(f.read())
+        db.commit()
+
+# from flask docs
+def query_db(query, args=(), one=False):
+    cur = g.db.execute(query, args)
+    rv = [dict((cur.description[idx][0], value)
+               for idx, value in enumerate(row)) for row in cur.fetchall()]
+    return (rv[0] if rv else None) if one else rv
+
+# from flask docs
+@app.before_request
+def before_request():
+    g.db = connect_db()
+
+# from flask docs
+@app.teardown_request
+def teardown_request(exception):
+    g.db.close()
+
+# from flask docs
+@app.errorhandler(404)
+def not_found(error):
+    return render_template('404.html'), 404
 
 @app.route('/')
 def index_page():
