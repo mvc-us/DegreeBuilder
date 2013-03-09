@@ -17,6 +17,8 @@ class Course:
 		self.pnp = pnp #0 or 1
 		self.technical = technical #0 or 1 #decide in Course from database
 		self.prereqs = prereqs #Compile all prereqs from database into list
+	def toString(self):
+		return str(self.abbrv) + ' ' + str(self.num)
         
 #Needs to be instantiated for algorithm to work. But how to assign String to be Course object?
 #Example: Algorithm appends 'HUMANITIES' as a required course. 'HUMANITIES' refernces what?
@@ -24,4 +26,4 @@ HUMANITIES = Course('HUMANITIES',units = 4.0)
 SCIENCE = Course('SCIENCE', units = 4.0, is_technical = 1)
 ELECTIVE = Course('ELECTIVE', units = 4.0)
 ELECTIVES = Course('ELECTIVES', units = 4.0)
-TECHNICAL ELECTIVE = Course('TECHNICAL ELECTIVE', units = 4.0, is_technical = 1)
+TECHNICALELECTIVE = Course('TECHNICAL ELECTIVE', units = 4.0, is_technical = 1)

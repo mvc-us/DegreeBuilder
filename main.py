@@ -11,4 +11,4 @@ from algorithm import *
 from app.py import *
 
 def make_demo(student):
-    return generate_schedule(algorithm)
+    return algorithm.algorithm(student)

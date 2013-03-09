@@ -1,6 +1,7 @@
 from __future__ import with_statement
 from contextlib import closing
 from flask import Flask, request, session, redirect, url_for, abort, g, render_template, flash
+from student_info import Student
 from ap_info import APEngineering
 import sqlite3
 
@@ -16,34 +17,6 @@ app = Flask(__name__)
 app.config.from_object(__name__)
 
 # from flask docs
-def connect_db():
-    return sqlite3.connect(app.config['DATABASE'])
-
-# from flask docs
-def init_db():
-    with closing(connect_db()) as db:
-        with register.open_resource('schema.sql') as f:
-            db.cursor().executescript(f.read())
-        db.commit()
-
-# from flask docs
-def query_db(query, args=(), one=False):
-    cur = g.db.execute(query, args)
-    rv = [dict((cur.description[idx][0], value)
-               for idx, value in enumerate(row)) for row in cur.fetchall()]
-    return (rv[0] if rv else None) if one else rv
-
-# from flask docs
-@app.before_request
-def before_request():
-    g.db = connect_db()
-
-# from flask docs
-@app.teardown_request
-def teardown_request(exception):
-    g.db.close()
-
-# from flask docs
 @app.errorhandler(404)
 def not_found(error):
     return render_template('404.html'), 404
@@ -56,16 +29,25 @@ def index_page():
 def plan_page():
     """The planning function. We perform data processing here."""
     args = request.form
-    print args
+    # print args
     params = {}
     params['current'] = parse_semester(args['current'])
     params['grad'] = parse_semester(args['grad'])
     params['completed'] = int(args['completed'])
     params['major'] = str(args['major'])
     params['option'] = parse_option(args['option'])
+    params['courses'] = parse_courselist(args['courses'])
     params['scores'] = exam_scores(args)
-    print params
+    # print params
+    student = Student(semester_to_year(completed), params['grad'], ???,
+                      str(params['option']), apdict=params['scores'],
+                      taken_courses=params['courses'])
+    schedule = student.generate_schedule
+    orderedkeys = sorted(schedule.keys())
     return render_template('plan.html', params=params)
+
+def semester_to_year(completed):
+    return 1.0 + (0.5 * completed)
 
 def parse_semester(semester):
     semester = semester.split()
@@ -76,6 +58,9 @@ def parse_semester(semester):
 def parse_option(option):
     optionmap = {'I': 1, 'II': 2, 'III': 3, 'IV': 4, 'V': 5}
     return optionmap[option.split()[0]]
+
+def parse_courselist(strlist):
+    return strlist.split(', ')
 
 def exam_list():
     return sorted(APEngineering.keys())

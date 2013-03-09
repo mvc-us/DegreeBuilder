@@ -49,6 +49,7 @@ def course_map(student_dict, needed_courses, unit_cap = 16, technical_cap = 12):
 			this_sem_prereq = False
 
 			for course1 in student_dict[key]:
+				course1 = get_course(course1)
 				sem_total += course1.units
 
 				if course1.is_technical:
@@ -77,6 +78,7 @@ def course_map(student_dict, needed_courses, unit_cap = 16, technical_cap = 12):
 			tech_total = pre_tech_total
 
 			for course1 in student_dict[key]:
+				course1 = get_course(course1)
 				sem_total += course1.units
 
 				if course1.is_technical:
