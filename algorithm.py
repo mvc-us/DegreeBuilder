@@ -11,6 +11,10 @@ from student_info import *
 from course_info import *
 import random
 
+HUMAN = ['ANTHRO 2AC', 'SLAVIC R5A', 'ANTHRO R5B', 'HISTORY 11', 'ASAMST 125', 'HISTORY 4', 'PSYCH 2', 'GWS 10', 'GWS 125', 'MUSIC 26AC', 'SOCIOL 3AC', 'PHILOS 25A', 'COG SCI 1', 'ECON 100A', 'UGBA 10', 'EA LANG C50', 'CLASSIC 28', 'LINGUIS 5', 'POL SCI C79']
+SCIENCE = ['CHEM 4A', 'ASTRON 10', 'MCELLBI 61', 'EPS C20']
+ELECTIVE = ['EECS 188', 'EECS 122', 'EECS 172', 'EECS 126']
+
 FAILURE = -1
 
 def algorithm(student):
@@ -163,6 +167,8 @@ def course_map(student_dict, needed_courses, student, completed_courses, unit_ca
 
 # @return: list of courses completed
 def completed(student_dict):
+	humanities_rep(student_dict)
+	science_rep(student_dict)
 	done = []
 	for key in student_dict:
 		done += student_dict[key]
@@ -179,11 +185,19 @@ def map_del(student_dict, course):
 def humanities_rep(student_dict):
 	for i in range(6):
 		for key in student_dict:
-			student_dict[key] = [x.replace("HUMANITIES", random.choice(HUMAN)) for x in student_dict[key])		
-					
-	
+			student_dict[key] = [x.replace("HUMANITIES", random.choice(HUMAN)) for x in student_dict[key]]		
 
+def science_rep(student_dict):
+	for i in range(6):
+		for key in student_dict:
+			student_dict[key] = [x.replace("SCIENCE", random.choice(SCIENCE)) for x in student_dict[key]]
 
+def elective_rep(student_dict):
+	for key in student_dict:
+		for item in student_dict[key]:
+			if item.find('ELECTIVE') != -1:
+				student_dict[key].remove(item)
+				student_dict[key].append(random.choice(ELECTIVE))
 
 #@return: list of APs applied
 def apply_ap(student):

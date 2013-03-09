@@ -28,6 +28,7 @@ def get_course(name):
     if isinstance(name, Course): return name
     special = { 'HUMANITIES': Course('HUMANITIES', units = 4.0),
                 'SCIENCE': Course('SCIENCE', units = 4.0, technical = 1),
+                'ENGINEERING': Course('ENGINEERING', units = 4.0, technical = 1),
                 'ELECTIVE': Course('ELECTIVE', units = 4.0),
                 'ELECTIVES': Course('ELECTIVES', units = 4.0),
                 'TECHNICAL ELECTIVE': Course('TECHNICAL ELECTIVE', units = 4.0, technical = 1) }
