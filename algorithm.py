@@ -20,17 +20,18 @@ def algorithm(student):
 	completed_courses = []
 	needed_courses = []
 	
-	for item in student.taken_courses:
-		completed_courses.append(item)
+	for key in student.taken_courses:
+		for item in student.taken_courses[key]:
+			completed_courses.append(item)
 
-	completed_courses.append(apply_ap(student))
+	completed_courses.append(APCreditMain.get_credit(student))
 
 	req = completed(plan)
 	for course in completed_courses:
 		if course in req:
 			map_del(plan, course)
 
-	for key in student.major.requirements.keys():
+	for key in student.major.requirements:
 		if len(key) == student.major.requirements[key]:
 			for course in key:
 				if course not in completed_courses:
