@@ -96,8 +96,5 @@ def exam_scores(args):
         exams[exam] = int(args[scorestr])
     return exams
 
-def store_course(course):
-    
-
 if __name__ == '__main__':
     app.run()
