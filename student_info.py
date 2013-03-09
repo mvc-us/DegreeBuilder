@@ -9,7 +9,7 @@
 
 
 class Major:
-	#@params: dict of major requirements -  int(# from following list): [array of courses to choose from]
+	#@params: dict of major requirements -  (tuple of courses to choose from): int(# needed from these)
 		# dict of determined courses - by default, what classes student will take in a given semester for the major
 	def __init__(self, req_list_dict, determined_courses_dict):
 		self.requirements = req_list_dict
